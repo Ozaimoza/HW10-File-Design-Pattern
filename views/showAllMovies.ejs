@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+    <title>Show Movies</title>
+  </head>
+  <body>
+    
+
+    <div class="container">
+        <h1>Show Movies</h1>
+        <p><a class="btn btn-primary" href="/movies/add" role="button">Add Movies</a></p>
+        <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">no</th>
+                <th scope="col">title</th>
+                <th scope="col">genres</th>
+                <th scope="col">year</th>
+                <th scope="col">photo</th>
+                
+                <th scope="col">Edit</th>
+                <th scope="col">Delete</th>
+              </tr>
+            </thead>
+            <tbody>
+            <% for (let i  = 0; i < movies.length; i++) { %>
+              <tr>
+                <th scope="row"><%= i + 1 %></th>
+                <td><%= movies[i].title %></td>
+                <td><%= movies[i].genres %></td>
+                <td><%= movies[i].year%></td>
+                <td>
+                  <img src="<%= movies[i].photo %>" style="max-width: 100px; max-height: 100px;">
+                </td>
+                
+                <td><a class="btn btn-success" href="/movies/<%= movies[i].id %>/edit" role="button">Edit</a></td>
+                <td>
+                  <form method="POST" action="/movies/<%= movies[i].id %>/delete?_method=DELETE" onsubmit="return confirm('Are you sure you want to delete <%= movies[i].title %> ?')">
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                  </form>
+                </td>
+              </tr>
+              <% } %>
+              
+            </tbody>
+          </table>
+    </div>
+
+  </body>
+</html>
